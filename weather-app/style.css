@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+/*     background-color: #f8f9d2; */
+    background-image: url("https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3840&q=2160"),linear-gradient(315deg, #f8f9d2 0%, #e8dbfc 74%);
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: 'Sawarabi Gothic', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.tag{
+    color: white;
+}
+
+input {
+    border-radius: 25px;
+    border: none;
+    padding: 1.2rem;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.3);
+    font-family: inherit;
+    min-width: 25rem;
+}
+
+input:focus{
+    outline: none;
+}
+
+.weather{
+    text-align: center;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    color: white;
+}
+
+.weather h1 {
+    margin-bottom: 0;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.weather small {
+    font-size: 0.9rem;
+}
+
+.weather img {
+    transform: scale(2);
+    margin: 2rem;
+}
