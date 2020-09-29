@@ -30,15 +30,16 @@ function addMeal(mealData, random=false){
         </div>
         <div class="meal__body">
             <h4>${mealData.strMeal}</h4>
-            <button class="fav__btn" id="fav-btn">
+            <button class="fav__btn">
                 <i class="fas fa-heart"></i>
             </button>
         </div>
     `;
 
     meals.appendChild(meal);
-}
 
-favButton.addEventListener('click', () => {
-    favButton.classList.add('active');
-})
+   const btn = meal.querySelector('.meal__body .fav__btn')
+   btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+    });
+}

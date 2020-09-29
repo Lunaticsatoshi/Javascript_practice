@@ -128,7 +128,7 @@ header button {
     margin: 0;
 }
 
-.meal__body .fav__btn{
+.meal__body.fav__btn{
     background-color: transparent;
     border: none;
     font: 1.2rem;
@@ -136,6 +136,6 @@ header button {
     cursor: pointer;
 }
 
-.meal__body .fav__btn .active{
+.meal__body.fav__btn.active{
     background-color: red;
 }
