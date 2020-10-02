@@ -1,6 +1,4 @@
 const meals = document.getElementById('meals');
-const favButton = document.getElementById('fav-btn');
-
 
 getRandomMeal();
 
@@ -41,5 +39,28 @@ function addMeal(mealData, random=false){
    const btn = meal.querySelector('.meal__body .fav__btn')
    btn.addEventListener('click', () => {
         btn.classList.toggle('active');
+        if(btn.classList.contains('active')){}
     });
+}
+
+function addToLocalStorage(meal){
+    const meals = getMealsFromLocalStorage();
+
+    localStorage.setItem('meals', JSON.stringify([...meals, meal]));
+}
+
+function getMealsFromLocalStorage(){
+    const meals = JSON.parse(localStorage.getItem('meals'));
+
+    if (meals === null){
+        return []
+    }
+
+    return meals
+}
+
+function removeMealfromLocalStorage(passedMeal){
+    const meals = getMealsFromLocalStorage();
+
+    localStorage.setItem('meals',JSON.stringify(meals.filter(meal => meal !== passedMeal)));
 }
