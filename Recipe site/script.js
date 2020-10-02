@@ -1,4 +1,5 @@
 const meals = document.getElementById('meals');
+const favMeals = document.getElementById('fav-meals');
 
 getRandomMeal();
 fetchFavouriteMeals();
@@ -7,7 +8,6 @@ async function getRandomMeal(){
    const res = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
    const resData = await res.json()
    const randomMeals = resData.meals[0]
-   console.log(randomMeals);
 
    addMeal(randomMeals, true);
 }
@@ -55,7 +55,15 @@ function addMeal(mealData, random=false){
     });
 }
 
-function addMealToFavourite(meal){}
+function addMealToFavourite(meal){
+    console.log(meal)
+    const myFavMeal = document.createElement('li');
+    meal.innerHTML = `
+    <img src="${meal.strMealThumb} alt=${meal.strMeal} />
+    <span>${meal.strMeal}</span>
+    `
+    favMeals.appendChild(myFavMeal);
+}
 
 function addToLocalStorage(meal){
     console.log(meal)
@@ -78,12 +86,10 @@ function removeMealfromLocalStorage(passedMeal){
 
 async function fetchFavouriteMeals(){
     const mealIds = getMealsFromLocalStorage();
-    const meals = []
 
-    for (let i=0; i < meals.length; i++){
-        const mealID = meals[i];
+    for (let i=0; i < mealIds.length; i++){
+        const mealID = mealIds[i];
         const meal = await getMealById(mealID);
-        meals.push(meal);
+        addMealToFavourite(meal);
     }
-    console.log(meals)
 }
