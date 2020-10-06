@@ -1,5 +1,7 @@
 const meals = document.getElementById('meals');
 const favMeals = document.getElementById('fav-meals');
+const searchTerm = document.getElementById('search-term');
+const search = document.getElementById('search')
 
 getRandomMeal();
 fetchFavouriteMeals();
@@ -20,7 +22,10 @@ async function getMealById(id) {
 }
 
 async function mealSearch(name){
-    const search = await  fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
+    const search = await  fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
+    const resData = await search.json();
+    const meals = await resData.meals
+    return meals
 }
 
 function addMeal(mealData, random=false){
@@ -52,17 +57,28 @@ function addMeal(mealData, random=false){
             btn.classList.add('active');
             addToLocalStorage(mealData.idMeal);
         }
+        
+        fetchFavouriteMeals();
     });
 }
 
 function addMealToFavourite(meal){
-    console.log(meal)
     const myFavMeal = document.createElement('li');
-    meal.innerHTML = `
-    <img src="${meal.strMealThumb} alt=${meal.strMeal} />
-    <span>${meal.strMeal}</span>
+    myFavMeal.innerHTML = `
+        <div class="meals__container">
+            <img src=${meal.strMealThumb} alt=${meal.strMeal} />
+            <span>${meal.strMeal}</span>
+            <button class="clear"><i class="far fa-window-close"></i></button>
+        </div>
     `
     favMeals.appendChild(myFavMeal);
+
+    const btn = document.querySelector(".clear")
+    btn.addEventListener('click', () => {
+        console.log('click')
+        removeMealfromLocalStorage(meal.idMeal);
+        fetchFavouriteMeals();
+    })
 }
 
 function addToLocalStorage(meal){
@@ -86,6 +102,8 @@ function removeMealfromLocalStorage(passedMeal){
 
 async function fetchFavouriteMeals(){
     const mealIds = getMealsFromLocalStorage();
+    //clean Fav meals
+    favMeals.innerHTML = '';
 
     for (let i=0; i < mealIds.length; i++){
         const mealID = mealIds[i];
@@ -93,3 +111,8 @@ async function fetchFavouriteMeals(){
         addMealToFavourite(meal);
     }
 }
+
+search.addEventListener('click', () => {
+    const name = searchTerm.Value
+    console.log(mealSearch(name));
+})
